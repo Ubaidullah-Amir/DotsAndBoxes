@@ -1,0 +1,11 @@
+from Board import *
+game1=Game([],4*2+1,4*2+1)
+game1.Initiate()
+print(game1.Mat)
+print("get matric",game1.Get_matrix())
+print("drawing matric")
+game1.Draw_mat()
+print("action 2 1")
+game1.action(2,1)
+print("drawing matric")
+game1.Draw_mat()
