@@ -10,13 +10,13 @@ GREY = (164, 162,162)
 
 
 class Game: #A class for managing different situations and states happening in the game and on the board
-    def __init__(self, Mat, dimX, dimY,win,mouse_position):
+    def __init__(self, Mat, dimX, dimY,win):
         self.Mat = Mat
         self.dimX = dimX
         self.dimY = dimY
         self.win=win
         self.UI_Mat=[]
-        self.mouse_position=mouse_position
+        self.mouse_position=(0,0)
 
     def Initiate(self): #initiating the game board with X and Y dimensions
         for i in range(0, self.dimY):
@@ -79,8 +79,8 @@ class Game: #A class for managing different situations and states happening in t
                     temp_row.append("*")
                     # circle postion change row-wise
                     circle_x+=35
-                if self.Mat[i][j] == 10:
-                    temp_row.append("10")
+                if self.Mat[i][j] == 5:
+                    temp_row.append("5")
                 if i%2==1 and self.Mat[i][j]==" ":
                     
                     obj=Rect(rect_x,rect_y,3,35)
@@ -125,7 +125,7 @@ class Game: #A class for managing different situations and states happening in t
 
 
     def Get_currentState(self):
-        return Game(self.Get_matrix(), self.dimX, self.dimY,self.win,self.mouse_position)
+        return Game(self.Get_matrix(), self.dimX, self.dimY,self.win)
 
     def action(self, i, j,player): # Applying the actions made by the human or the computer
         # print(f"selfMat[{j}][{i}] =")
@@ -140,8 +140,6 @@ class Game: #A class for managing different situations and states happening in t
         #     rect_obj.draw(self.win,GREEN)
         # else:
         #     rect_obj.draw(self.win,RED)
-        
-        print("UI mat",self.UI_Mat)
         
         Sum = 0
 

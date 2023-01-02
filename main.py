@@ -17,7 +17,7 @@ pygame.init()
 # window size
 win = pygame.display.set_mode((WIDTH, HEIGHT))
 running=True
-Match = DotsNBoxes(2*2+1, 2*2+1, 3,win,(0,0))
+Match = DotsNBoxes(2*2+1, 2*2+1, 3,win)
 Match.start()
 # while running:
 #     win.fill(WHITE)

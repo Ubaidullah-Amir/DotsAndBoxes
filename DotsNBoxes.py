@@ -6,10 +6,10 @@ import pygame
 
 
 class DotsNBoxes: # A class for managing the moves made by the human and the computer
-    def __init__(self, Board_Xdim, Board_Ydim, Ply_num,win,mouse_position):
+    def __init__(self, Board_Xdim, Board_Ydim, Ply_num,win):
         self.win=win
-        self.mouse_position=mouse_position
-        currentState = Game([], Board_Xdim, Board_Ydim,win,mouse_position)
+        self.mouse_position=(0,0)
+        currentState = Game([], Board_Xdim, Board_Ydim,win)
         currentState.Initiate()
         self.State = Thing(currentState)
         self.Ply_num = Ply_num
@@ -25,6 +25,7 @@ class DotsNBoxes: # A class for managing the moves made by the human and the com
         HumanX_pressed=False
         HumanY_pressed=False
         font = pygame.font.Font('freesansbold.ttf', 13)
+        
         text_obj_AI_move = font.render("Move played by AI"+self.AI_move, True, GREEN)
         text_obj_current_score = font.render("Your current score"+self.current_score_UI, True, BLUE)
         
@@ -32,11 +33,36 @@ class DotsNBoxes: # A class for managing the moves made by the human and the com
             self.win.fill(WHITE)
             self.win.blit(text_obj_AI_move, (200,0))
             self.win.blit(text_obj_current_score, (200,50))
+
+            text_mouse_postion=font.render("mouse position"+ str(self.mouse_position),True,GREEN)
+            self.win.blit(text_mouse_postion,(200,100))
+            self.State.Current.mouse_position=self.mouse_position
             
+            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     print("quit")
                     running=False
+
+                #Mouse inputs
+                if event.type == pygame.MOUSEBUTTONDOWN:  
+                    loop_breaker=False
+                    for i in range(5):
+                        for j in range(5):
+                            # print("selected result is i:",i,"j :",j)
+                            if type(self.State.Current.UI_Mat[i][j]) != str:
+                                # print("not str selected result is i:",i,"j :",j)
+                                if self.State.Current.UI_Mat[i][j].rect.collidepoint(pygame.mouse.get_pos()):
+                                    print("the mouse is colliding wiht rect")
+                                    HumanX=j
+                                    HumanY=i
+                                    HumanX_pressed=HumanY_pressed=True
+                                    loop_breaker=True
+                                    break
+                        if loop_breaker:
+                            break
+                                
                 # checking if keydown event happened or not
                 if event.type == pygame.KEYDOWN:
                     
