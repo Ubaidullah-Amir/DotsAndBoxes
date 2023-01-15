@@ -12,12 +12,12 @@ GREEN = (0, 255, 0)
 BLACK = (12, 12, 12)
 GREY = (164, 162,162)
 
-SCREEN = WIDTH, HEIGHT = 400, 400
+SCREEN = WIDTH, HEIGHT = 800, 600
 pygame.init()
 # window size
 win = pygame.display.set_mode((WIDTH, HEIGHT))
 running=True
-Match = DotsNBoxes(2*2+1, 2*2+1, 3,win)
+Match = DotsNBoxes(3*2+1, 3*2+1, 3,win)
 Match.start()
 # while running:
 #     win.fill(WHITE)

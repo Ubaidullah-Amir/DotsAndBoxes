@@ -5,6 +5,7 @@ class Thing: # A class for Node related operations
         self.children = {}
 
     def Make(self, i, j, player): # Function for generating a child node
+        print("AI's new node",f'AI[{i}][{j}]')
         self.children[(i, j)] = Thing(self.Current.Get_currentState())
         mul = 1
         if player:

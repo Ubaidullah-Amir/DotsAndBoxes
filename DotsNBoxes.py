@@ -18,24 +18,26 @@ class DotsNBoxes: # A class for managing the moves made by the human and the com
         self.current_score_UI="0"
         self.someone_win=False
         self.winning_text=""
+        self.Board_Xdim=Board_Xdim
+        self.Board_Ydim=Board_Ydim
         
 
     def Human(self): # Defining the Human player and his actions/Choices
         running= True
         HumanX_pressed=False
         HumanY_pressed=False
-        font = pygame.font.Font('freesansbold.ttf', 13)
+        font = pygame.font.Font('freesansbold.ttf', 18)
         
         text_obj_AI_move = font.render("Move played by AI"+self.AI_move, True, GREEN)
         text_obj_current_score = font.render("Your current score"+self.current_score_UI, True, BLUE)
         
         while running:
             self.win.fill(WHITE)
-            self.win.blit(text_obj_AI_move, (200,0))
-            self.win.blit(text_obj_current_score, (200,50))
+            self.win.blit(text_obj_AI_move, (500,100))
+            self.win.blit(text_obj_current_score, (500,200))
 
             text_mouse_postion=font.render("mouse position"+ str(self.mouse_position),True,GREEN)
-            self.win.blit(text_mouse_postion,(200,100))
+            self.win.blit(text_mouse_postion,(500,300))
             self.State.Current.mouse_position=self.mouse_position
             
             
@@ -48,8 +50,8 @@ class DotsNBoxes: # A class for managing the moves made by the human and the com
                 #Mouse inputs
                 if event.type == pygame.MOUSEBUTTONDOWN:  
                     loop_breaker=False
-                    for i in range(5):
-                        for j in range(5):
+                    for i in range(self.Board_Ydim):
+                        for j in range(self.Board_Xdim):
                             # print("selected result is i:",i,"j :",j)
                             if type(self.State.Current.UI_Mat[i][j]) != str:
                                 # print("not str selected result is i:",i,"j :",j)
@@ -166,7 +168,7 @@ class DotsNBoxes: # A class for managing the moves made by the human and the com
 
     def Computer(self): # Defining the Computer player and its actions/Choices
         self.State.Draw(False)
-
+        print(self.State.Current.UI_Mat)
         move = Algo.miniMax(self.State, self.Ply_num)
 
         self.State = self.State.children[(move[0], move[1])]
